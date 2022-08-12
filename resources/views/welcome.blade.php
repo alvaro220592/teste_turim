@@ -6,18 +6,24 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Document</title>
 
+        {{-- Token para fazer as requisições --}}
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
         {{-- CSS do Bootstrap --}}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
         
+        {{-- Bootstrap icons --}}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
     </head>
     <body>
         <div class="container">
             <div class="row mt-3">
                 <div class="col-md-2 mb-3">
-                    <button type="button" class="btn btn-primary form-control">Gravar</button>
+                    <button type="button" class="btn btn-primary form-control" onclick="gravar()">Gravar</button>
                 </div>
                 <div class="col-md-2 mb-3">
-                    <button type="button" class="btn btn-primary form-control">Ler</button>
+                    <button type="button" class="btn btn-primary form-control" onclick="ler()">Ler</button>
                 </div>
             </div>
 
@@ -53,7 +59,7 @@
 
                 {{-- seção direita --}}
                 <section class="col-md-6">
-                    <textarea id="textarea" class="form-control" cols="30" style="height: 90%">
+                    <textarea id="textarea" class="form-control" cols="30" style="height: 90%" readonly>
                         {{-- Preenchido via JS --}}
                     </textarea>
                 </section>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Child;
 use App\Models\Person;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class PersonController extends Controller
      */
     public function index()
     {
-        return response()->json(Person::all());
+        return response()->json(Person::with('children')->get());
     }
 
     /**
@@ -25,12 +26,26 @@ class PersonController extends Controller
      */
     public function store(Request $request)
     {
-        $person = new Person;
-        $person->fill($request->all());
-        if($person->save()){
-            return response()->json(['response' => 'ok', 'message' => 'Pessoa cadastrada com sucesso']);
-        }else{
-            return response()->json(['response' => 'erro', 'message' => 'Erro ao cadastrar']);
+        $pessoas = $request->pessoas;
+        
+        try{
+            foreach($pessoas as $pessoa){
+                $p = new Person;
+                $p->name = $pessoa['nome'];
+                $p->save();
+                
+                if($pessoa['filhos']){
+                    foreach($pessoa['filhos'] as $filho){
+                        $c = new Child;
+                        $c->name = $filho;
+                        $c->person_id = $p->id;
+                        $c->save();
+                    }
+                }
+            }
+            return response()->json(['response' => 'ok', 'message' => 'Dados salvos com sucesso']);
+        }catch(\Throwable $th){
+            return response()->json(['response' => 'error', 'message' => 'Erro: ' . $th->getMessage()]);
         }
     }
 

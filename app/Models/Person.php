@@ -10,4 +10,8 @@ class Person extends Model
     use HasFactory;
 
     protected $fillable = ['name'];
+
+    public function children(){
+        return $this->hasMany(Child::class, 'person_id');
+    }
 }
