@@ -1,0 +1,12 @@
+Front end puro:
+criar um app que traz um campo de texto onde se pode inserir um nome e ao clicar em 'incluir',
+seja alimentado um json ao lado direito.
+Este json trará o objeto "pessoas" e cada uma terá um nome e um array chamado "filhos".
+À medida em que este json recebe dados, ao lado esquerdo é preciso ter uma tabela onde será adicionada uma nova linha com o registro dessa pessoa que entrou. Esta linha terá o nome da pessoa e um botão de remover.
+Abaixo desta linha terá um botão de adicionar filho. O campo de texto para o nome do filho vem através de um prompt. Abaixo da linha da pessoa então, é adicionadaa linha do filho que tem uma cor de fundo diferente.
+Acima de tudo estão 2 botões: gravar e ler. O gravar manda o json pro banco de dados e o ler traz os dados do banco de dados no tipo json pra preencher a tabela
+
+back-end:
+há 2 tabelas: pessoas e filhos, sendo que a de filhos tem a chave estrangeira das pessoas
+Fazer uma lógica para que antes de gravar, fazer deletar tudo pra não acumular dados
+opcional: dar um dump no banco de dados pra enviar junto com o projeto
